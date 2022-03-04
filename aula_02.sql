@@ -1,4 +1,3 @@
-
 create database cadastro;
 use cadastro;
 create table pessoas(
