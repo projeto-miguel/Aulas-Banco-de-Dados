@@ -1,0 +1,74 @@
+Microsoft Windows [versão 10.0.19043.1165]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\Alunos>cd c:\xampp\mysql\bin
+
+c:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 111
+Server version: 10.4.17-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show tables
+    -> ;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| ex                 |
+| information_schema |
+| mercado            |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
+| teste              |
++--------------------+
+8 rows in set (0.001 sec)
+
+MariaDB [(none)]> use ex
+Database changed
+MariaDB [ex]> show tables;
++--------------+
+| Tables_in_ex |
++--------------+
+| cliente      |
+| compra       |
+| produto      |
++--------------+
+3 rows in set (0.001 sec)
+
+MariaDB [ex]> describe cliente;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id_cliente   | int(11)      | NO   | PRI | NULL    | auto_increment |
+| email        | varchar(255) | YES  |     | NULL    |                |
+| estado       | varchar(255) | YES  |     | NULL    |                |
+| nome_cliente | varchar(255) | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.012 sec)
+
+MariaDB [ex]> insert into cliente(nome_cliente,email,estado)
+    -> VALUES('joberson','job52@yahoo.com.br','MA'),
+    -> ('gerson','gers.on55@bol.com.br','MG'),
+    -> ('abel','abel1967@bol.com.br','SP');
+Query OK, 3 rows affected (0.004 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [ex]> select * from cliente;
++------------+----------------------+--------+--------------+
+| id_cliente | email                | estado | nome_cliente |
++------------+----------------------+--------+--------------+
+|          1 | job52@yahoo.com.br   | MA     | joberson     |
+|          2 | gers.on55@bol.com.br | MG     | gerson       |
+|          3 | abel1967@bol.com.br  | SP     | abel         |
++------------+----------------------+--------+--------------+
+3 rows in set (0.001 sec)
+
+MariaDB [ex]>
