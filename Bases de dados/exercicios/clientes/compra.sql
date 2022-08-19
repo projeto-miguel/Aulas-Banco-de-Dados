@@ -3,14 +3,14 @@ CREATE DATABASE mercado;
 USE mercado;
 
 CREATE TABLE produto (
-codigo_produto int PRIMARY KEY,
+codigo_produto int PRIMARY KEY AUTO_INCREMENT,
 nome_produto varchar(255),
 cor varchar(255),
 preco decimal(8,2)
 );
 
 CREATE TABLE cliente (
-id_cliente int PRIMARY KEY,
+id_cliente int PRIMARY KEY AUTO_INCREMENT,
 email varchar(255),
 estado varchar(255),
 nome_cliente varchar(255)
