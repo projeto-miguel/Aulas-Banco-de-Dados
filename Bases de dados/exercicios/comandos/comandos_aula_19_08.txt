@@ -1,0 +1,241 @@
+Microsoft Windows [versão 10.0.19043.1165]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\Alunos>cd C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 166
+Server version: 10.4.17-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mercado            |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> use mercado
+Database changed
+MariaDB [mercado]>
+MariaDB [mercado]>
+MariaDB [mercado]>
+MariaDB [mercado]>
+MariaDB [mercado]>
+MariaDB [mercado]>
+MariaDB [mercado]>
+MariaDB [mercado]>
+MariaDB [mercado]>
+MariaDB [mercado]>
+MariaDB [mercado]>
+MariaDB [mercado]>
+MariaDB [mercado]>
+MariaDB [mercado]>
+MariaDB [mercado]>
+MariaDB [mercado]> show tables
+    -> ;
++-------------------+
+| Tables_in_mercado |
++-------------------+
+| cliente           |
+| compra            |
+| produto           |
++-------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [mercado]> describe compra;
++----------------+----------+------+-----+---------+----------------+
+| Field          | Type     | Null | Key | Default | Extra          |
++----------------+----------+------+-----+---------+----------------+
+| nf             | int(11)  | NO   | PRI | NULL    | auto_increment |
+| data_compra    | datetime | YES  |     | NULL    |                |
+| id_cliente     | int(11)  | YES  | MUL | NULL    |                |
+| codigo_produto | int(11)  | YES  | MUL | NULL    |                |
++----------------+----------+------+-----+---------+----------------+
+4 rows in set (0.020 sec)
+
+MariaDB [mercado]> select * from cliente;
+Empty set (0.002 sec)
+
+MariaDB [mercado]> describe produto;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| codigo_produto | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nome_produto   | varchar(255) | YES  |     | NULL    |                |
+| cor            | varchar(255) | YES  |     | NULL    |                |
+| preco          | decimal(8,2) | YES  |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.020 sec)
+
+MariaDB [mercado]> insert into produto(nome_produto,cor,preco)
+    -> values('LAPIS','PRETO',8.00),
+    -> values('CARTOLINA','AZUL',5.00),
+    -> values('BONÉ','CINZA',30.00),
+    -> values('MEIA','BRANCA',8.00);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'values('CARTOLINA','AZUL',5.00),
+values('BONÉ','CINZA',30.00),
+values('MEIA'...' at line 3
+MariaDB [mercado]> insert into produto(nome_produto,cor,preco)
+    -> values('MEIA','BRANCA',8.00),
+    -> ('BONÉ','CINZA',30.00),
+    -> ('CARTOLINA','AZUL',5.00),
+    -> ('LAPIS','PRETO',8.00),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 5
+MariaDB [mercado]> insert into produto(nome_produto,cor,preco)
+    -> values('MEIA','BRANCA',8.00),
+    -> ('LAPIS','PRETO',8.00),
+    -> ('CARTOLINA','AZUL',5.00),
+    -> ('BONÉ','CINZA',30.00);
+Query OK, 4 rows affected (0.010 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [mercado]> select * from produto;
++----------------+--------------+--------+-------+
+| codigo_produto | nome_produto | cor    | preco |
++----------------+--------------+--------+-------+
+|              1 | MEIA         | BRANCA |  8.00 |
+|              2 | LAPIS        | PRETO  |  8.00 |
+|              3 | CARTOLINA    | AZUL   |  5.00 |
+|              4 | BONÉ         | CINZA  | 30.00 |
++----------------+--------------+--------+-------+
+4 rows in set (0.000 sec)
+
+MariaDB [mercado]> describe cliente;
++--------------+--------------+------+-----+---------+----------------+
+| Field        | Type         | Null | Key | Default | Extra          |
++--------------+--------------+------+-----+---------+----------------+
+| id_cliente   | int(11)      | NO   | PRI | NULL    | auto_increment |
+| email        | varchar(255) | YES  |     | NULL    |                |
+| estado       | varchar(255) | YES  |     | NULL    |                |
+| nome_cliente | varchar(255) | YES  |     | NULL    |                |
++--------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.023 sec)
+
+MariaDB [mercado]> insert into cliente(email,estado,nome_cliente)
+    -> values('jose','jose@email.com','MA'),
+    -> ('maria','maria2020@bol.com.br','RJ'),
+    -> ('joao','jo.ao@yahoo.com.br','SP');
+Query OK, 3 rows affected (0.011 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [mercado]> describe compra;
++----------------+----------+------+-----+---------+----------------+
+| Field          | Type     | Null | Key | Default | Extra          |
++----------------+----------+------+-----+---------+----------------+
+| nf             | int(11)  | NO   | PRI | NULL    | auto_increment |
+| data_compra    | datetime | YES  |     | NULL    |                |
+| id_cliente     | int(11)  | YES  | MUL | NULL    |                |
+| codigo_produto | int(11)  | YES  | MUL | NULL    |                |
++----------------+----------+------+-----+---------+----------------+
+4 rows in set (0.010 sec)
+
+MariaDB [mercado]> insert into compra(data_compra,id_cliente,codigo_produto)
+    -> values(2022-08-19,1);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [mercado]> insert into compra(data_compra,id_cliente,codigo_produto)
+    -> values(2022-08-19,1,2);
+Query OK, 1 row affected, 1 warning (0.010 sec)
+
+MariaDB [mercado]> select * from cliente;
++------------+-------+----------------------+--------------+
+| id_cliente | email | estado               | nome_cliente |
++------------+-------+----------------------+--------------+
+|          1 | jose  | jose@email.com       | MA           |
+|          2 | maria | maria2020@bol.com.br | RJ           |
+|          3 | joao  | jo.ao@yahoo.com.br   | SP           |
++------------+-------+----------------------+--------------+
+3 rows in set (0.000 sec)
+
+MariaDB [mercado]> select * from compra;
++----+---------------------+------------+----------------+
+| nf | data_compra         | id_cliente | codigo_produto |
++----+---------------------+------------+----------------+
+|  1 | 0000-00-00 00:00:00 |          1 |              2 |
++----+---------------------+------------+----------------+
+1 row in set (0.000 sec)
+
+MariaDB [mercado]> delete from compra where nf=1;
+Query OK, 1 row affected (0.009 sec)
+
+MariaDB [mercado]> select * from compra;
+Empty set (0.000 sec)
+
+MariaDB [mercado]> insert into compra(data_compra,id_cliente,codigo_produto)
+    -> values('2022-08-19',1,2);
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [mercado]> select * from compra;
++----+---------------------+------------+----------------+
+| nf | data_compra         | id_cliente | codigo_produto |
++----+---------------------+------------+----------------+
+|  2 | 2022-08-19 00:00:00 |          1 |              2 |
++----+---------------------+------------+----------------+
+1 row in set (0.000 sec)
+
+MariaDB [mercado]> insert into compra(data_compra,id_cliente,codigo_produto)
+    -> values('2022-02-25',3,3),
+    -> ('2020-07-27',2,1),
+    -> ('2021-17-07',2,3);
+Query OK, 3 rows affected, 1 warning (0.011 sec)
+Records: 3  Duplicates: 0  Warnings: 1
+
+MariaDB [mercado]> select * from compra;
++----+---------------------+------------+----------------+
+| nf | data_compra         | id_cliente | codigo_produto |
++----+---------------------+------------+----------------+
+|  2 | 2022-08-19 00:00:00 |          1 |              2 |
+|  3 | 2022-02-25 00:00:00 |          3 |              3 |
+|  4 | 2020-07-27 00:00:00 |          2 |              1 |
+|  5 | 0000-00-00 00:00:00 |          2 |              3 |
++----+---------------------+------------+----------------+
+4 rows in set (0.000 sec)
+
+MariaDB [mercado]> delete from compra where nf=5;
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [mercado]> select * from compra;
++----+---------------------+------------+----------------+
+| nf | data_compra         | id_cliente | codigo_produto |
++----+---------------------+------------+----------------+
+|  2 | 2022-08-19 00:00:00 |          1 |              2 |
+|  3 | 2022-02-25 00:00:00 |          3 |              3 |
+|  4 | 2020-07-27 00:00:00 |          2 |              1 |
++----+---------------------+------------+----------------+
+3 rows in set (0.000 sec)
+
+MariaDB [mercado]> update from compra
+    -> set data_compra='2019-09-01'
+    -> where nf=4;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from compra
+set data_compra='2019-09-01'
+where nf=4' at line 1
+MariaDB [mercado]> update compra
+    -> set data_compra='2019-09-01'
+    -> where nf=4;
+Query OK, 1 row affected (0.010 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [mercado]> select * from compra;
++----+---------------------+------------+----------------+
+| nf | data_compra         | id_cliente | codigo_produto |
++----+---------------------+------------+----------------+
+|  2 | 2022-08-19 00:00:00 |          1 |              2 |
+|  3 | 2022-02-25 00:00:00 |          3 |              3 |
+|  4 | 2019-09-01 00:00:00 |          2 |              1 |
++----+---------------------+------------+----------------+
+3 rows in set (0.000 sec)
+
+MariaDB [mercado]>
