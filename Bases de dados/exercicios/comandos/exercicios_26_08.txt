@@ -1,0 +1,126 @@
+
+C:\xampp\mysql\bin>cd C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 62
+Server version: 10.4.17-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use mercado
+Database changed
+MariaDB [mercado]> select * from produto ;
++----------------+--------------+--------+-------+
+| codigo_produto | nome_produto | cor    | preco |
++----------------+--------------+--------+-------+
+|              1 | MEIA         | BRANCA |  8.00 |
+|              2 | LAPIS        | PRETO  |  8.00 |
+|              3 | CARTOLINA    | AZUL   |  5.00 |
+|              4 | BONÉ         | CINZA  | 33.00 |
++----------------+--------------+--------+-------+
+4 rows in set (0.001 sec)
+
+MariaDB [mercado]> UPDATE produto SET nome_produto = "RÉGUA DE 30 CM"
+    -> WHERE codigo_produto = 4;
+Query OK, 1 row affected (0.011 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [mercado]> select * from produto ;
++----------------+----------------+--------+-------+
+| codigo_produto | nome_produto   | cor    | preco |
++----------------+----------------+--------+-------+
+|              1 | MEIA           | BRANCA |  8.00 |
+|              2 | LAPIS          | PRETO  |  8.00 |
+|              3 | CARTOLINA      | AZUL   |  5.00 |
+|              4 | RÉGUA DE 30 CM | CINZA  | 33.00 |
++----------------+----------------+--------+-------+
+4 rows in set (0.001 sec)
+
+MariaDB [mercado]> UPDATE SET preco = preco * 1.1
+    -> WHERE codigo_produto = 3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'SET preco = preco * 1.1
+WHERE codigo_produto = 3' at line 1
+MariaDB [mercado]> UPDATE SET preco = preco * 1.1
+    -> WHERE codigo_produto = 3;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'SET preco = preco * 1.1
+WHERE codigo_produto = 3' at line 1
+MariaDB [mercado]> UPDATE produto SET preco = preco * 1.1
+    -> WHERE codigo_produto = 3;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [mercado]> select * from produto ;
++----------------+----------------+--------+-------+
+| codigo_produto | nome_produto   | cor    | preco |
++----------------+----------------+--------+-------+
+|              1 | MEIA           | BRANCA |  8.00 |
+|              2 | LAPIS          | PRETO  |  8.00 |
+|              3 | CARTOLINA      | AZUL   |  5.50 |
+|              4 | RÉGUA DE 30 CM | CINZA  | 33.00 |
++----------------+----------------+--------+-------+
+4 rows in set (0.001 sec)
+
+MariaDB [mercado]> SELECT * FROM produto
+    -> WHERE cor = "azul";
++----------------+--------------+------+-------+
+| codigo_produto | nome_produto | cor  | preco |
++----------------+--------------+------+-------+
+|              3 | CARTOLINA    | AZUL |  5.50 |
++----------------+--------------+------+-------+
+1 row in set (0.000 sec)
+
+MariaDB [mercado]> SELECT * FROM produto
+    -> WHERE preco > 10;
++----------------+----------------+-------+-------+
+| codigo_produto | nome_produto   | cor   | preco |
++----------------+----------------+-------+-------+
+|              4 | RÉGUA DE 30 CM | CINZA | 33.00 |
++----------------+----------------+-------+-------+
+1 row in set (0.000 sec)
+
+MariaDB [mercado]> SELECT * FROM produto
+    -> WHERE preco BETWEEN 2 AND 10;
++----------------+--------------+--------+-------+
+| codigo_produto | nome_produto | cor    | preco |
++----------------+--------------+--------+-------+
+|              1 | MEIA         | BRANCA |  8.00 |
+|              2 | LAPIS        | PRETO  |  8.00 |
+|              3 | CARTOLINA    | AZUL   |  5.50 |
++----------------+--------------+--------+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [mercado]> INSERT INTO produto(nome_produto,cor,preco)
+    -> VALUES("carro","magenta",500000);
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [mercado]> SELECT * FROM produto
+    -> ;
++----------------+----------------+---------+-----------+
+| codigo_produto | nome_produto   | cor     | preco     |
++----------------+----------------+---------+-----------+
+|              1 | MEIA           | BRANCA  |      8.00 |
+|              2 | LAPIS          | PRETO   |      8.00 |
+|              3 | CARTOLINA      | AZUL    |      5.50 |
+|              4 | RÉGUA DE 30 CM | CINZA   |     33.00 |
+|              5 | carro          | magenta | 500000.00 |
++----------------+----------------+---------+-----------+
+5 rows in set (0.001 sec)
+
+MariaDB [mercado]> DELETE FROM produto WHERE codigo_produto = 5;
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [mercado]> SELECT * FROM produto ;
++----------------+----------------+--------+-------+
+| codigo_produto | nome_produto   | cor    | preco |
++----------------+----------------+--------+-------+
+|              1 | MEIA           | BRANCA |  8.00 |
+|              2 | LAPIS          | PRETO  |  8.00 |
+|              3 | CARTOLINA      | AZUL   |  5.50 |
+|              4 | RÉGUA DE 30 CM | CINZA  | 33.00 |
++----------------+----------------+--------+-------+
+4 rows in set (0.000 sec)
+
+MariaDB [mercado]>
